@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalDouble;
 
 @Service
 public class DbService {
@@ -17,8 +16,14 @@ public class DbService {
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
-    public Optional<Task> getTaskById(Long id) {
+    public Optional<Task> getTaskById(final Long id) {
         return taskRepository.findById(id);
+    }
+    public Task  saveTask(final Task task) {
+        return taskRepository.save(task);
+    }
+    public void deleteTask(final Long id) {
+     taskRepository.deleteById(id);
     }
 
 }
