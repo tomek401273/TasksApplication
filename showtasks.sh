@@ -3,17 +3,18 @@
 
 
 succes() {
-echo"Successfuly running runcrud script"
+echo "Successfuly running runcrud script"
 }
 fail() {
-echo "Cannot runn runcrud script"
+echo "Something went wrong......"
 }
 
 openbrowser() {
  gnome-www-browser --open  http://localhost:8080/crud/v1/task/getTasks
 }
 
-if sh ./runcrud.sh; then
+if ./gradlew build; then
+sh ./runcrud.sh
 succes
 openbrowser
 
