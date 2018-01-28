@@ -16,7 +16,11 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
+//apply plugin: 'war'
+
+//war {
+//	archiveName 'crud.war'
+//}
 
 group = 'com.crud'
 version = '0.0.1-SNAPSHOT'
@@ -45,6 +49,6 @@ dependencies {
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
 //	runtime 'org.postgresql:postgresql:42.1.1'
 	//compile 'postgresql:postgresql:9.1-901-1.jdbc4'
-	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+//	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
 }
