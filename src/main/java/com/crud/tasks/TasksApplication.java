@@ -6,7 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class TasksApplication{
+public class TasksApplication extends SpringBootServletInitializer{
     //extends SpringBootServletInitializer
     public static void main(String[] args) {
         SpringApplication.run(TasksApplication.class, args);
@@ -17,8 +17,8 @@ public class TasksApplication{
         System.out.println(System.getenv("JDBC_DATABASE_PASSWORD"));
 
     }
-//@Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//       return application.sources(TasksApplication.class);
-//}
+@Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+       return application.sources(TasksApplication.class);
+}
 }

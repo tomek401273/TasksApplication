@@ -16,7 +16,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-//apply plugin: 'war'
+apply plugin: 'war'
 
 //war {
 //	archiveName 'crud.war'
@@ -35,7 +35,7 @@ repositories {
 dependencies {
 
 	compile('org.springframework.boot:spring-boot-starter-web')
-//	compile('org.projectlombok:lombok')
+
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.boot:spring-boot-starter-validation')
@@ -43,12 +43,13 @@ dependencies {
 	//runtime('mysql:mysql-connector-java')
 // https://mvnrepository.com/artifact/postgresql/postgresql
 	//compile group: 'postgresql', name: 'postgresql', version: '9.1-901.jdbc4'
+	//	runtime 'org.postgresql:postgresql:42.1.1'
+	//compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 	compile group: 'org.postgresql', name: 'postgresql', version: '9.4-1206-jdbc42'
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.18'
-//	runtime 'org.postgresql:postgresql:42.1.1'
-	//compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+
 //	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
 }

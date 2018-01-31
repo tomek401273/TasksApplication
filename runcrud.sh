@@ -17,7 +17,8 @@ start_tomcat()
 rename() {
   rm build/libs/crud.war
 
-  if mv /home/tomasz/Dokumenty/Development/Kodilla-Rest/tasks/build/libs/tasks-0.0.1-SNAPSHOT.war /home/tomasz/Dokumenty/Development/Kodilla-Rest/tasks/build/libs/crud.war; then
+      if mv ./build/libs/tasks-0.0.1-SNAPSHOT.war ./build/libs/crud.war; then
+
      echo "Successfully renamed file"
   else
      echo "Cannot rename file"
@@ -26,7 +27,7 @@ rename() {
 }
 
 copy_file() {
-  if cp /home/tomasz/Dokumenty/Development/Kodilla-Rest/tasks/build/libs/crud.war $CATALINA_HOME/webapps; then
+  if cp ./build/libs/crud.war $CATALINA_HOME/webapps; then
      start_tomcat
   else
      fail
