@@ -25,7 +25,16 @@ rename() {
      fail
   fi
 }
+check_Catalina() {
+  if(CATALINA_HOME == ""); then
 
+    echo "CATALINA_HOME not found"
+  else
+
+  echo "CATALINA_HOME successfully found"
+
+fi
+}
 copy_file() {
   if cp ./build/libs/crud.war $CATALINA_HOME/webapps; then
      start_tomcat
@@ -43,6 +52,7 @@ end() {
 }
 
 if ./gradlew build; then
+   check_Catalina
    rename
    copy_file
 else
