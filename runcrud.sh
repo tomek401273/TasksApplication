@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export CATALINA_HOME=/home/tomasz/Dokumenty/Development/Programs/tomcat/apache-tomcat-9.0.4
+export CATALINA_HOME=/home/$USER/Dokumenty/Development/Programs/tomcat/apache-tomcat-9.0.4
 
 
 stop_tomcat()
@@ -57,5 +57,5 @@ if ./gradlew build; then
    copy_file
 else
    stop_tomcat
-   fail
+   fails
 fi
