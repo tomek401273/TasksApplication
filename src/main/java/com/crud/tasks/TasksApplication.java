@@ -22,4 +22,3 @@ public class TasksApplication extends SpringBootServletInitializer{
        return application.sources(TasksApplication.class);
 }
 }
-//////Lubie placki///////
