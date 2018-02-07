@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Getter
+@ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreatedTrelloCard {
     @JsonProperty("id")
@@ -21,12 +23,7 @@ public class CreatedTrelloCard {
     @JsonProperty("badges")
     private Badges badges;
 
-    @Override
-    public String toString() {
-        return "CreatedTrelloCard{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", shortUrl='" + shortUrl + '\'' +
-                '}';
+    public CreatedTrelloCard(String s, String test_task, String s1) {
     }
+
 }
