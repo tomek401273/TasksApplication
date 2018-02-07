@@ -10,11 +10,6 @@ public class TasksApplication{
     //extends SpringBootServletInitializer
     public static void main(String[] args) {
         SpringApplication.run(TasksApplication.class, args);
-        System.out.print("Lubie placki");
-
-        System.out.println(System.getenv("JDBC_DATABASE_URL"));
-        System.out.println(System.getenv("JDBC_DATABASE_USERNAME"));
-        System.out.println(System.getenv("JDBC_DATABASE_PASSWORD"));
 
     }
 //@Override
