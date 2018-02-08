@@ -27,20 +27,15 @@ public class EmailScheduler {
         long size = taskRepository.count();
         // long size = (long)20;
 
-        String appendix = addAppendix(size);
-
+        String appendix = "task";
+        if (size > 1) {
+            appendix.join("s");
+        }
 
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminmail(),
                 SUBJECT,
                 "Currently in database you got: " + size + appendix)
         );
-    }
-
-    private String addAppendix(Long size) {
-        if (size < 2) {
-            return " task";
-        }
-        return " tasks";
     }
 }
