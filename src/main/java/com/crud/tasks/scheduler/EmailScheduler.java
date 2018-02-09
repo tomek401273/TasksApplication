@@ -27,9 +27,9 @@ public class EmailScheduler {
         long size = taskRepository.count();
         // long size = (long)20;
 
-        String appendix = "task";
+        String appendix = " task";
         if (size > 1) {
-            appendix.join("s");
+            appendix = " tasks";
         }
 
         simpleEmailService.send(new Mail(
