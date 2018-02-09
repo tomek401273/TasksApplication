@@ -25,17 +25,10 @@ public class EmailScheduler {
     @Scheduled(cron = "0 0 10 * * *")
     public void sendInformatonEmail() {
         long size = taskRepository.count();
-        // long size = (long)20;
-
-        String appendix = " task";
-        if (size > 1) {
-            appendix = " tasks";
-        }
 
         simpleEmailService.send(new Mail(
                 adminConfig.getAdminmail(),
                 SUBJECT,
-                "Currently in database you got: " + size + appendix)
-        );
+                String.join(" ", "Currently in database you got: ", Long.toString(size), size > 1 ? "task" : "tasks")));
     }
 }

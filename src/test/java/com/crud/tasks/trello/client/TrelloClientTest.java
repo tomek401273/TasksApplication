@@ -39,6 +39,7 @@ public class TrelloClientTest {
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
+    //    when(trelloConfig.getTrelloUsername()).thenReturn("tomek");
     }
 
     @Test
@@ -79,13 +80,7 @@ public class TrelloClientTest {
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
         trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
 
-        //   URI uri = new URI("http://test.com/members/kodillauser/boards?key=test&token=test&fields=name,id&lists=all");
 
-//        URI uri = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + trelloConfig.getTrelloUsername())
-//                .queryParam("key", trelloConfig.getTrelloAppKey())
-//                .queryParam("token", trelloConfig.getTrelloToken())
-//                .queryParam("fields", "name,id")
-//                .queryParam("lists", "all").build().encode().toUri();
 
         URI uri = new URI("http://test.comnull?key=test&token=test&fields=name,id&lists=all");
 
@@ -104,7 +99,7 @@ public class TrelloClientTest {
     @Test
     public void shouldReturnEmptyList() throws URISyntaxException {
         // Given
-        URI uri = new URI("http://test.comnull?key=test&token=test&fields=name,id&lists=all");
+        URI uri = new URI("http://test.com/tomek?key=test&token=test&fields=name,id&lists=all");
         when(restTemplate.getForObject(uri, RestTemplate.class)).thenReturn(null);
 
         // When
