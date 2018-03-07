@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -55,17 +56,22 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$[0].title", is("task1")))
                 .andExpect(jsonPath("$[0].content", is("desc")));
     }
-//    @Test
-//    public void shouldGetSingleTask() throws Exception {
-//        // Given
-//        TaskDto taskDto = new TaskDto((long) 1, "task1", "desc");
-//        Task task = new Task();
-//        when(dbService.getTaskById((long)1).orElseThrow(TaskNotFoundException::new)).thenReturn(task);
-//
-////        mockMvc.perform(get("/v1/task/getTask").contentType(MediaType.APPLICATION_JSON))
-////                .andExpect(status().isOk());
-//
-//    }
+    @Test
+    public void shouldGetSingleTask() throws Exception {
+        // Given
+        TaskDto taskDto = new TaskDto((long) 1, "title", "content");
+        Optional<Task> task = Optional.of(new Task((long)1,"title","content"));
+        when(dbService.getTaskById((long)1)).thenReturn(task);
+        when(taskMapper.mapToTaskDto(task.orElseThrow(TaskNotFoundException::new))).thenReturn(taskDto);
+
+        mockMvc.perform(get("/v1/task/getTask").contentType(MediaType.APPLICATION_JSON)
+        .param("taskId", "1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id",is(1)))
+                .andExpect(jsonPath("$.title",is("title")))
+                .andExpect(jsonPath("$.content",is("content")));
+
+    }
 
     @Test
     public void shouldDeleteTask() throws Exception {
