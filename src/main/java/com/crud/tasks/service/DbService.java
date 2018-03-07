@@ -16,14 +16,23 @@ public class DbService {
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
+
     public Optional<Task> getTaskById(final Long id) {
         return taskRepository.findById(id);
     }
-    public Task  saveTask(final Task task) {
+
+    public Task saveTask(final Task task) {
         return taskRepository.save(task);
     }
-    public void deleteTask(final Long id) {
-     taskRepository.deleteById(id);
+
+    public boolean deleteTask(final Long id) {
+        try {
+            taskRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 
 }

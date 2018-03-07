@@ -22,15 +22,19 @@ public class TrelloFacade {
     private TrelloValidator trelloValidator;
 
     public List<TrelloBoardDto> fetchTrelloBoards() {
-        List<TrelloBoard> trelloBoards = trelloMapper.mapToBoards(trelloService.fetchTrelloBoards());
-        List<TrelloBoard> filteredBoards = trelloValidator.validateTrelloBoards(trelloBoards);
+        List<TrelloBoard> trelloBoards =
+                trelloMapper.mapToBoards(trelloService.fetchTrelloBoards());
+        List<TrelloBoard> filteredBoards =
+                trelloValidator.validateTrelloBoards(trelloBoards);
         return trelloMapper.mapToBoardsDto(filteredBoards);
     }
 
     public CreatedTrelloCardDto createCard(final TrelloCardDto trelloCardDto) {
-        TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
+        TrelloCard trelloCard
+                = trelloMapper.mapToCard(trelloCardDto);
         trelloValidator.validateCard(trelloCard);
-        return trelloService.createdTrelloCard(trelloMapper.mapToCardDto(trelloCard));
+        return trelloService
+                .createdTrelloCard(trelloMapper.mapToCardDto(trelloCard));
     }
 
 }
