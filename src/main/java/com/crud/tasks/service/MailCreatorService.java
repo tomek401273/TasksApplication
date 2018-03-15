@@ -1,6 +1,7 @@
 package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
+import com.crud.tasks.config.CompanyConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,14 @@ public class MailCreatorService {
     private AdminConfig adminConfig;
 
     @Autowired
+    private CompanyConfig companyConfig;
+
+    @Autowired
     @Qualifier("templateEngine")
     private TemplateEngine templateEngine;
+
+    private String welcome="Welcome welcome";
+    private String godbye="Have a nice day";
 
     public String buildTrelloCardEmail(String message) {
         List<String> functionality = new ArrayList<>();
@@ -36,6 +43,9 @@ public class MailCreatorService {
         context.setVariable("is_friend", false);
         context.setVariable("admin_config",adminConfig);
         context.setVariable("application_functionality", functionality);
+        context.setVariable("companyConfig", companyConfig);
+        context.setVariable("welcomeMessage", welcome);
+        context.setVariable("godbyeMessage", godbye);
         return  templateEngine.process("mail/created-trello-card-mail", context);
     }
 }
