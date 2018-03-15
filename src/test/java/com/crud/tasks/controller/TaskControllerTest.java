@@ -64,7 +64,7 @@ public class TaskControllerTest {
         when(dbService.getTaskById((long)1)).thenReturn(task);
         when(taskMapper.mapToTaskDto(task.orElseThrow(TaskNotFoundException::new))).thenReturn(taskDto);
 
-        mockMvc.perform(get("/v1/task/getTask").contentType(MediaType.APPLICATION_JSON)
+        mockMvc.perform(get("/v1/task").contentType(MediaType.APPLICATION_JSON)
         .param("taskId", "1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id",is(1)))
