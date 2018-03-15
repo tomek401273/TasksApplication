@@ -27,10 +27,14 @@ public class SimpleEmailService {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+
+            if (mail.getMessage().contains("Currently")) {
+                messageHelper.setText(mailCreatorService.buildScheduleEmail(mail.getMessage()), true);
+            } else {
+                messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            }
         };
     }
-
 
     private SimpleMailMessage createMailMessage(final Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
@@ -44,11 +48,12 @@ public class SimpleEmailService {
     public void send(final Mail mail) {
         LOGGER.info("Starting email preparation...");
         try {
+            javaMailSender.send(createMimeMesage(mail));
+            LOGGER.info("Email has been sent.");
+
 //            SimpleMailMessage mailMessage = createMailMessage(mail);
 //            javaMailSender.send(mailMessage);
-            javaMailSender.send(createMimeMesage(mail));
 
-            LOGGER.info("Email has been sent.");
         } catch (MailException e) {
             LOGGER.error("Failed to process email sending: ", e.getMessage(), e);
         }
