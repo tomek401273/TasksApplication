@@ -23,14 +23,23 @@ public class MailCreatorService {
     @Qualifier("templateEngine")
     private TemplateEngine templateEngine;
 
-    private String welcome="Welcome welcome";
-    private String godbye="Have a nice day";
+    private String welcome = "Welcome welcome";
+    private String godbye = "Have a nice day";
 
     public String buildTrelloCardEmail(String message) {
         List<String> functionality = new ArrayList<>();
-        functionality.add("You can menanage your tasks");
-        functionality.add("Previous connection with Trello Account");
-        functionality.add("Application allow sending tasks to trello ");
+        boolean isSchedulingEmail = false;
+
+        if (message.contains("Currently")) {
+            functionality.add("Today will be great day");
+            functionality.add("you will accomplish all your scheduld task ");
+            functionality.add("Yes you can !!!");
+            isSchedulingEmail= true;
+        } else {
+            functionality.add("You can menanage your tasks");
+            functionality.add("Previous connection with Trello Account");
+            functionality.add("Application allow sending tasks to trello ");
+        }
 
         Context context = new Context();
         context.setVariable("message", message);
@@ -39,12 +48,13 @@ public class MailCreatorService {
         context.setVariable("admin_name", adminConfig.getAdminName());
         context.setVariable("show_button", false);
         context.setVariable("is_friend", false);
-        context.setVariable("admin_config",adminConfig);
+        context.setVariable("admin_config", adminConfig);
         context.setVariable("application_functionality", functionality);
         context.setVariable("companyConfig", companyConfig);
         context.setVariable("welcomeMessage", welcome);
         context.setVariable("godbyeMessage", godbye);
-        return  templateEngine.process("mail/created-trello-card-mail", context);
+        context.setVariable("isScheduling", isSchedulingEmail);
+        return templateEngine.process("mail/created-trello-card-mail", context);
     }
 
     public String buildScheduleEmail(String message) {
@@ -60,7 +70,7 @@ public class MailCreatorService {
         context.setVariable("admin_name", adminConfig.getAdminName());
         context.setVariable("show_button", false);
         context.setVariable("is_friend", false);
-        context.setVariable("admin_config",adminConfig);
+        context.setVariable("admin_config", adminConfig);
         context.setVariable("application_functionality", posibility);
         context.setVariable("companyConfig", companyConfig);
         context.setVariable("welcomeMessage", welcome);
