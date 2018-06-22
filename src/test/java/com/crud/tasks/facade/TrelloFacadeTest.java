@@ -50,7 +50,7 @@ public class TrelloFacadeTest {
         CreatedTrelloCardDto createdCard = trelloFacade.createCard(trelloCardDto);
         // Then
         Assert.assertEquals(createdCard.getId(), "1");
-        Assert.assertEquals(createdCard.getBadges().getVotes(),3);
+        Assert.assertEquals(createdCard.getBadges().getVotes(), 3);
         Assert.assertEquals(createdCard.getName(), "test");
         Assert.assertEquals(createdCard.getShortUrl(), "shortUrl");
     }
@@ -72,7 +72,7 @@ public class TrelloFacadeTest {
         CreatedTrelloCardDto createdCard = trelloFacade.createCard(trelloCardDto);
         // Then
         Assert.assertEquals(createdCard.getId(), null);
-        Assert.assertEquals(createdCard.getBadges().getVotes(),0);
+        Assert.assertEquals(createdCard.getBadges().getVotes(), 0);
         Assert.assertEquals(createdCard.getName(), null);
         Assert.assertEquals(createdCard.getShortUrl(), null);
     }
@@ -97,25 +97,20 @@ public class TrelloFacadeTest {
         when(trelloMapper.mapToBoardsDto(anyList())).thenReturn(trelloBoards);
         when(trelloValidator.validateTrelloBoards(mappedTrelloBoards))
                 .thenReturn(mappedTrelloBoards);
-
         // When
         List<TrelloBoardDto> trelloBoardDtos = trelloFacade.fetchTrelloBoards();
-
         // Then
         Assert.assertNotNull(trelloBoardDtos);
         Assert.assertEquals(1, trelloBoardDtos.size());
         trelloBoardDtos.forEach(trelloBoardDto -> {
             Assert.assertEquals("1", trelloBoardDto.getId());
             Assert.assertEquals("my_task", trelloBoardDto.getName());
-
             trelloBoardDto.getLists().forEach(trelloListDto -> {
                 Assert.assertEquals("1", trelloListDto.getId());
                 Assert.assertEquals("my_list", trelloListDto.getName());
                 Assert.assertEquals(false, trelloListDto.isClosed());
             });
-
         });
-
     }
 
     @Test
@@ -137,10 +132,8 @@ public class TrelloFacadeTest {
         when(trelloMapper.mapToBoards(trelloBoards)).thenReturn(mappedTrelloBoards);
         when(trelloMapper.mapToBoardsDto(anyList())).thenReturn(new ArrayList<>());
         when(trelloValidator.validateTrelloBoards(mappedTrelloBoards)).thenReturn(new ArrayList<>());
-
         // When
         List<TrelloBoardDto> trelloBoardDtos = trelloFacade.fetchTrelloBoards();
-
         // Then
         Assert.assertNotNull(trelloBoardDtos);
         Assert.assertEquals(0, trelloBoardDtos.size());

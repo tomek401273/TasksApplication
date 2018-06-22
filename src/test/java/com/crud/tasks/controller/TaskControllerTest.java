@@ -56,21 +56,21 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$[0].title", is("task1")))
                 .andExpect(jsonPath("$[0].content", is("desc")));
     }
+
     @Test
     public void shouldGetSingleTask() throws Exception {
         // Given
         TaskDto taskDto = new TaskDto((long) 1, "title", "content");
-        Optional<Task> task = Optional.of(new Task((long)1,"title","content"));
-        when(dbService.getTaskById((long)1)).thenReturn(task);
+        Optional<Task> task = Optional.of(new Task((long) 1, "title", "content"));
+        when(dbService.getTaskById((long) 1)).thenReturn(task);
         when(taskMapper.mapToTaskDto(task.orElseThrow(TaskNotFoundException::new))).thenReturn(taskDto);
 
         mockMvc.perform(get("/v1/task").contentType(MediaType.APPLICATION_JSON)
-        .param("taskId", "1"))
+                .param("taskId", "1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id",is(1)))
-                .andExpect(jsonPath("$.title",is("title")))
-                .andExpect(jsonPath("$.content",is("content")));
-
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.title", is("title")))
+                .andExpect(jsonPath("$.content", is("content")));
     }
 
     @Test
@@ -115,8 +115,8 @@ public class TaskControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
-                .andExpect(jsonPath("$.id",is(1)))
-                .andExpect(jsonPath("$.title",is("task1")))
-                .andExpect(jsonPath("$.content",is("desc")));
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.title", is("task1")))
+                .andExpect(jsonPath("$.content", is("desc")));
     }
 }

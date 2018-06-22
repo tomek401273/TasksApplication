@@ -36,5 +36,4 @@ public class TrelloFacade {
         return trelloService
                 .createdTrelloCard(trelloMapper.mapToCardDto(trelloCard));
     }
-
 }

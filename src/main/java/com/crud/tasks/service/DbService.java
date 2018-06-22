@@ -32,7 +32,5 @@ public class DbService {
         } catch (Exception e) {
             return false;
         }
-
     }
-
 }

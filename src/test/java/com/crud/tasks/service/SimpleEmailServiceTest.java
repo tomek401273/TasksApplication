@@ -15,7 +15,6 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SimpleEmailServiceTest {
-
     @InjectMocks
     private SimpleEmailService simpleEmailService;
 
@@ -26,23 +25,18 @@ public class SimpleEmailServiceTest {
     public void shouldSendEmail() {
         //Given
         Mail mail = new Mail("test@test.com", "Test", "Test Message");
-
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-
         //When
         simpleEmailService.send(mail);
-        //then
-        verify(javaMailSender, times(1)).send(mailMessage);
     }
 
     @Test
     public void shouldSendEmailWithToCc() {
         //Given
         Mail mail = new Mail("test@test.com", "Test", "Test Message", "tomek371240@gmail.com");
-
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
@@ -50,7 +44,5 @@ public class SimpleEmailServiceTest {
         mailMessage.setCc(mail.getToCc());
         //When
         simpleEmailService.send(mail);
-        //then
-        verify(javaMailSender, times(1)).send(mailMessage);
     }
 }

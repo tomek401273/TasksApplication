@@ -15,6 +15,10 @@ import java.util.List;
 public class TrelloService {
     private static final String SUBJECT = "Task: New Trello card";
 
+    public List<TrelloBoardDto> fetchTrelloBoards() {
+        return trelloClient.getTrelloBoards();
+    }
+
     @Autowired
     private TrelloClient trelloClient;
 
@@ -24,20 +28,12 @@ public class TrelloService {
     @Autowired
     private AdminConfig adminConfig;
 
-    public List<TrelloBoardDto> fetchTrelloBoards() {
-        return trelloClient.getTrelloBoards();
-    }
-
     public CreatedTrelloCardDto createdTrelloCard(final TrelloCardDto trelloCardDto) {
         CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
-
         ofNullable(newCard).ifPresent( card-> emailService.send(new Mail(
                 adminConfig.getAdminmail(),
                 SUBJECT,
                 "New card " +card.getName() + " has been created on your Trello accound")));
-
-
-
         return newCard;
     }
 }

@@ -58,7 +58,6 @@ public class TrelloControllerTest {
         List<TrelloBoardDto> trelloBoardDtos = new ArrayList<>();
         trelloBoardDtos.add(new TrelloBoardDto("1", "Test Task", trelloListDtos));
         when(trelloFacade.fetchTrelloBoards()).thenReturn(trelloBoardDtos);
-
         // When & Then
         mockMvc.perform(get("/v1/trello/boards").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -86,18 +85,15 @@ public class TrelloControllerTest {
                 "Test",
                 "http://test.com");
         when(trelloFacade.createCard(ArgumentMatchers.any(TrelloCardDto.class))).thenReturn(createdTrelloCardDto);
-
         Gson gson = new Gson();
         String jsonContent = gson.toJson(trelloCardDto);
-
         // When & Then
         mockMvc.perform(post("/v1/trello/cards")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
-                .andExpect(jsonPath("$.id",is("323")))
+                .andExpect(jsonPath("$.id", is("323")))
                 .andExpect(jsonPath("$.name", is("Test")))
-                .andExpect(jsonPath("$.shortUrl",is("http://test.com")));
-
+                .andExpect(jsonPath("$.shortUrl", is("http://test.com")));
     }
 }

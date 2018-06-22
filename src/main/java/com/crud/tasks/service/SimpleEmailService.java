@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SimpleEmailService {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMailMessage.class);
 
     @Autowired
@@ -28,22 +27,7 @@ public class SimpleEmailService {
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
             messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
-
-//            if (mail.getMessage().contains("Currently")) {
-//                messageHelper.setText(mailCreatorService.buildScheduleEmail(mail.getMessage()), true);
-//            } else {
-//                messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
-//            }
         };
-    }
-
-    private SimpleMailMessage createMailMessage(final Mail mail) {
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(mail.getMailTo());
-        mailMessage.setSubject(mail.getMailTo());
-        mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()));
-        return mailMessage;
     }
 
     public void send(final Mail mail) {
@@ -51,25 +35,8 @@ public class SimpleEmailService {
         try {
             javaMailSender.send(createMimeMesage(mail));
             LOGGER.info("Email has been sent.");
-
-//            SimpleMailMessage mailMessage = createMailMessage(mail);
-//            javaMailSender.send(mailMessage);
-
         } catch (MailException e) {
             LOGGER.error("Failed to process email sending: ", e.getMessage(), e);
         }
     }
-//    private SimpleMailMessage createMailMessage(final Mail mail) {
-//        SimpleMailMessage mailMessage = new SimpleMailMessage();
-//        mailMessage.setTo(mail.getMailTo());
-//        mailMessage.setSubject(mail.getSubject());
-//        mailMessage.setText(mail.getMessage());
-//
-//        if (mail.getToCc() != null) {
-//            mailMessage.setCc(mail.getToCc());
-//        }
-//        return mailMessage;
-//    }
-
-
 }

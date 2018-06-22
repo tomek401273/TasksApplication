@@ -18,7 +18,6 @@ public class StaticWebPageContriller {
         model.put("one", 1);
         model.put("two", 2);
         model.put("companyConfig",companyConfig);
-
         return "index";
     }
 }

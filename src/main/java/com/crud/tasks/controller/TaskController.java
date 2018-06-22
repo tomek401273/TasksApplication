@@ -1,6 +1,5 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.MediaType.valueOf;
 
 @RestController
 @RequestMapping("/v1")
@@ -24,11 +22,6 @@ public class TaskController {
     public List<TaskDto> getTasks() {
         return taskMapper.mapToTaskDtoList(service.getAllTasks());
     }
-
-//    @RequestMapping(method = RequestMethod.GET, value = "/tasks/{taskId}")
-//    public TaskDto getTask(@PathVariable Long taskId) throws TaskNotFoundException {
-//        return taskMapper.mapToTaskDto(service.getTaskById(taskId).orElseThrow(TaskNotFoundException::new));
-//    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/task")
     public TaskDto getTask(@RequestParam Long taskId) throws TaskNotFoundException {
