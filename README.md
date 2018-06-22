@@ -1,0 +1,1 @@
+Aplikacja działa na darmowej wersji heroku. Po 30 minutach braku aktywności aplikacja przechodzi w stan uśpienia.  Aby wybudzić aplikacje należy kilka razy odświeżyć i chwilę poczekać. Link do działającej aplikacji https://tomek401273.github.io/index.html
